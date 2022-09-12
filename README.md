@@ -29,3 +29,4 @@ Tracking codes are something that you should keep to yourself and never publish 
 # Credits
 * discord.py maintainers.
 * https://github.com/MiroslavRosenov/better-ipc Better-IPC project that allows intercommunication in between the web server and discord.py
+* https://pgjones.gitlab.io/quart/ Quart web server for receiving PUSH notifications from 17Track
