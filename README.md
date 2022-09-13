@@ -22,6 +22,7 @@ The bot features several commands:
 Tracking codes are something that you should keep to yourself and never publish online. I came up with this bot in order to be used by a single user, nonetheless, it can be shared with other users. **IF you do NOT trust the person hosting the bot, please refrain from using it. I, the creator of this bot, will not be held responsible for any misuses of the bot or any other wrongdoings by other users. This bot is provided as-is and it is not my responsibility for any damages or information leaks.**
 
 ## Future features
+* Convert to Discord Slash commands.
 * Automatically run the webserver alongside the main bot so that both don't need to be run separately.
 * Change the carrier code with some other way to read the original carrier.
 * Port to Telegram API (in case that is your thing instead of Discord).
