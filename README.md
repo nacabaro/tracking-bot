@@ -1,6 +1,9 @@
 # tracking-bot
 A Discord bot that is designed to send you tracking updates of packages you order online.
 
+## Operating principle
+When someone orders something online, mail carriers will attach a code that uniquely identifies the package in order to carry out logistics tasks. This code is then given out to the user in some way or other. Depending on the carrier, this code can give you more or less some information that tells you where your package is located, or procedures being carried out, for example, if it went through customs, it is ready for delivery or if there are pending charges. This program uses that unique code and the service 17Track provides (https://www.17track.net/en) to locate the package and send you status notifications of the location of the package every time there is a change detected over Discord private messages.
+
 ## How does it work?
 This bot is designed to work with 17Track API. In order to use it, please refer to creating an API key in 17Track API website. https://api.17track.net/en. This bot works with 17Track ability to send PUSH notifications to a webserver when a package gets a tracking update. The speed of the tracking updates is determined by 17Track, as this bot will send a DM to the user once a tracking update is received by 17Track's PUSH service.
 
