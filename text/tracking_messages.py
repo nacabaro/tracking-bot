@@ -79,6 +79,12 @@ async def code_removed(ctx):
     await ctx.send(embed=embed)
 
 
+async def api_error(ctx, code):
+    embed = discord.Embed(title="An API error has occurred.",
+                          description=f'''Couldn't add the package. Check TrackingMore control panel for more information. Error code is {code}.''')
+    await ctx.send(embed=embed)
+
+
 async def too_soon(ctx):
     embed = discord.Embed(title=f'The package has no updates.')
     await ctx.send(embed=embed)
@@ -100,6 +106,24 @@ async def not_implemented(ctx):
     await ctx.send(embed=embed)
 
 
+async def ask_courier_code(ctx):
+    embed = discord.Embed(title=f'Please insert the new courier code:',
+                          description="Valid courier codes can be found [here](https://www.trackingmore.com/download-couriers.php).")
+    await ctx.send(embed=embed)
+
+
+async def valid_couriers(ctx):
+    embed = discord.Embed(title=f'Please insert a valid courier.',
+                          description="Valid courier codes can be found [here](https://www.trackingmore.com/download-couriers.php).")
+    await ctx.send(embed=embed)
+
+
+async def error_changing_courier(ctx):
+    embed = discord.Embed(title=f'Error changing courier.',
+                          description="Make sure you inserted a valid courier. Valid courier codes can be found [here](https://www.trackingmore.com/download-couriers.php).")
+    await ctx.send(embed=embed)
+
+
 async def changed_courier_code(ctx, courier_code, code):
     if code == 200:
         embed = discord.Embed(title=f'Changed courier code to {courier_code}.')
@@ -107,3 +131,23 @@ async def changed_courier_code(ctx, courier_code, code):
         embed = discord.Embed(title=f'Changed courier code to {courier_code}.',
                               description=f'Note: The package has no data with this courier. You might want to change couriers to the one before.')
     await ctx.send(embed=embed)
+
+
+async def force_added_code(user_dm, name):
+    embed = discord.Embed(title="Bot owner added a tracking code to you",
+                          description=f'You will now receive updates for {name}')
+
+    await user_dm.send(embed=embed)
+
+
+async def failed_eula(ctx):
+    embed = discord.Embed(title="This user hasn't agreed to the terms of service.")
+
+    await ctx.send(embed=embed)
+
+
+async def force_removed_code(user_dm, name):
+    embed = discord.Embed(title="Bot owner removed a tracking code to you",
+                          description=f'You will no longer receive updates for {name}')
+
+    await user_dm.send(embed=embed)

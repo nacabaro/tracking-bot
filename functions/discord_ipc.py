@@ -32,21 +32,25 @@ class Routes(commands.Cog):
             db_worker = ShippingCodesDB()
             db_worker.connect("shipping_codes.db")
 
-            tracking_update = {
-                'name': db_worker.get_name(index["number"], index["carrier"]),
-                'user': db_worker.get_user(index["number"], index["carrier"])[0],
-                'status': index["track_info"]["latest_status"]["status"],
-                'update_time': index["track_info"]["latest_event"]["time_iso"],
-                'description': index["track_info"]["latest_event"]["description"]
-            }
+            names = db_worker.get_names(index["number"], index["carrier"])
+            users = db_worker.get_users(index["number"], index["carrier"])
 
-            chat = await self.bot.fetch_user(tracking_update['user'])
-            embed = discord.Embed(
-                title=f'An update for {tracking_update["name"]} has been detected! ({tracking_update["status"]})',
-                description=f'{tracking_update["description"]} at {tracking_update["update_time"]}')
+            for i in range(len(names)):
+                tracking_update = {
+                    'name': names[i][0],
+                    'user': users[i][0],
+                    'status': index["track_info"]["latest_status"]["status"],
+                    'update_time': index["track_info"]["latest_event"]["time_iso"],
+                    'description': index["track_info"]["latest_event"]["description"]
+                }
 
-            print(f'{time()} -- sending tracking update to corresponding user')
-            await chat.send(embed=embed)
+                chat = await self.bot.fetch_user(tracking_update['user'])
+                embed = discord.Embed(
+                    title=f'An update for {tracking_update["name"]} has been detected! ({tracking_update["status"]})',
+                    description=f'{tracking_update["description"]} at {tracking_update["update_time"]}')
+
+                print(f'{time()} -- sending tracking update to corresponding user')
+                await chat.send(embed=embed)
 
             db_worker.close()
 
@@ -60,8 +64,8 @@ class Routes(commands.Cog):
             db_worker.connect("shipping_codes.db")
 
             tracking_stop = {
-                'name': db_worker.get_name(index["number"], index["carrier"]),
-                'user': db_worker.get_user(index["number"], index["carrier"])[0],
+                'name': db_worker.get_names(index["number"], index["carrier"]),
+                'user': db_worker.get_users(index["number"], index["carrier"])[0],
             }
 
             chat = await self.bot.fetch_user(tracking_stop['user'])

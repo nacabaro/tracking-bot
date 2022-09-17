@@ -1,0 +1,4 @@
+# Please agree to the disclaimers before starting the bot for the first time.
+# https://github.com/nacabaro/tracking-bot/blob/main/README.md#disclaimer
+# set eula to true if you agree
+eula=false
