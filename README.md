@@ -8,11 +8,11 @@ When someone orders something online, mail carriers will attach a code that uniq
 This bot is designed to work with 17Track API. In order to use it, please refer to creating an API key in 17Track API website. https://api.17track.net/en. This bot works with 17Track ability to send PUSH notifications to a webserver when a package gets a tracking update. The speed of the tracking updates is determined by 17Track, as this bot will send a DM to the user once a tracking update is received by 17Track's PUSH service.
 
 ## How to set up?
-To set up this bot, you must first a 17Track API key. This can be done for free using the website linked above. You will also need a Discord Bot token. To create it refer to Discord Developer Portal: https://discord.com/developers/applications. After getting both API Key and bot token, go to config.py file located in configs/config.py, being ``tm_secret="<your-17Track-API-key>"`` and ``discord_token="<your-Discord-Bot-Token>"``.
+To set up this bot, you must first a 17Track API key. This can be done for free using the website linked above. You will also need a Discord Bot token. To create it refer to Discord Developer Portal: https://discord.com/developers/applications. After getting both API Key and bot token, go to config.py file located in configs/config.py, being ``tm_secret="<your-17Track-API-key>"`` and ``discord_token="<your-Discord-Bot-Token>"``. You will also have to change the ``bot_owner = 123456789012345678`` with your corresponding Discord ID, which can be found by right clicking on your profile > Copy ID. Afterwards, open the eula.txt file and set eula to true in order to be able to start the bot.
 
 Once that is taken care of, open the port 8080 on your network, so that it's accessible to the outside. After head to https://api.17track.net/en/admin/settings and under webhook settings, set the URL as ``http://<your_public_ip>:8080/apitrack/webhook`` and the version parameter to V 2.0.
  
-After that, the bot is ready to launch. First, launch ``main.py`` and once the terminal says "IPC Ready", launch ``server.py``.
+After that, the bot is ready to launch. Launch ``main.py``.
 
 ## Features
 The bot features several commands:
