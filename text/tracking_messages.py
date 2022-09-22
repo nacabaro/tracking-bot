@@ -29,7 +29,7 @@ async def grab_status(ctx):
 
 
 async def ask_name(ctx):
-    embed = discord.Embed(title=f'Next type in the name of the package:')
+    embed = discord.Embed(title=f'Type in a name for the package.')
     msg = await ctx.send(embed=embed)
     return msg
 

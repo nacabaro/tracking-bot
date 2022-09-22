@@ -2,7 +2,7 @@ from objects.database_object import ShippingCodesDB
 from discord.ext.ipc.errors import IPCError
 from discord.ext.ipc.server import route
 from discord.ext import commands, ipc
-from functions.debug import time
+from functions.timestamp import time
 import discord
 
 

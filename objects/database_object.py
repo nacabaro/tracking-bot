@@ -76,7 +76,7 @@ class ShippingCodesDB:
         self.__cursor.execute('''SELECT carrier_code FROM codes WHERE name = ? AND package_owner = ?''', (name, user_id,))
         carrier_code = self.__cursor.fetchone()
         if carrier_code is None:
-            return -1
+            return None
 
         return carrier_code[0]
 
@@ -99,10 +99,17 @@ class ShippingCodesDB:
             self.__cursor.execute('''SELECT carrier_code FROM codes WHERE delivery_code = ? AND carrier_detect = ?''',
                                   (tracking_code, "automatic"))
         else:
-            self.__cursor.execute('''SELECT carrier_code FROM codes WHERE delivery_code = ? AND carrier_code ''',
+            self.__cursor.execute('''SELECT carrier_code FROM codes WHERE delivery_code = ? AND carrier_code = ?''',
                                   (tracking_code, carrier_code))
 
         return self.__cursor.fetchone()
+
+    def rename_code(self, name, new_name, user_id):
+        self.__cursor.execute("UPDATE codes SET name = ? WHERE name = ? AND package_owner = ?", (name, new_name, str(user_id)))
+        if self.get_code(self, new_name) is not None:
+            return True
+        else:
+            return False
 
     def commit_changes(self):
         self.__conn.commit()

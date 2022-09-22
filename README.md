@@ -30,7 +30,7 @@ Tracking codes are something that you should keep to yourself and never publish 
 ## Future features
 * Convert to Discord Slash commands.
 * ~~Automatically run the webserver alongside the main bot so that both don't need to be run separately.~~
-* Change the carrier code with some other way to read the original carrier.
+* ~~Change the carrier code with some other way to read the original carrier.~~
 * Port to Telegram API (in case that is your thing instead of Discord).
 * ~~Add an agreement form to the disclaimer and a warning before usage for the first time.~~
 * Add a requirements.txt file for easy deployment.

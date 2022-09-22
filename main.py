@@ -1,7 +1,8 @@
+from functions.carrier_code_processor import download_carrier_data
 from objects.database_object import ShippingCodesDB, DiscordUsers
 from configs.config import discord_token, tm_secret
-from functions.agree_eula import agree_eula
-from discord_commands.commands import bot
+from functions.bot_eula import agree_eula
+from discord_functions.commands import bot
 from functions.discord_ipc import Routes
 from server import app, IPC
 import asyncio
@@ -16,13 +17,13 @@ async def setup(bot_ctx):
 # -- Check eula
 if agree_eula() is False:
     exit(-1)
-    
+
 # -- Fork the bot to run the web server
 pid = os.fork()
 if pid > 0:
     pass
 else:
-    print(f'Waiting 10 seconds until IPC becomes ready...')
+    print(f'PREINIT -- Waiting 10 seconds until IPC becomes ready...')
     time.sleep(10)
     if __name__ == '__main__':
         loop = asyncio.new_event_loop()
@@ -45,21 +46,29 @@ userdb_worker = DiscordUsers()
 
 # -- Create and connect to shipping codes database
 if not os.path.isfile("shipping_codes.db"):
-    print("Shipping codes database not found. Creating one.")
+    print("PREINIT -- Shipping codes database not found. Creating one.")
     db_worker.connect(name="shipping_codes.db")
     db_worker.init_database()
 else:
-    print("Connecting to shipping codes database...")
+    print("PREINIT -- Connecting to shipping codes database...")
     db_worker.connect(name="shipping_codes.db")
+
+db_worker.close()
 
 # -- Create and connect to users database
 if not os.path.isfile("users_database.db"):
-    print("Users database not found. Creating one.")
+    print("PREINIT -- Users database not found. Creating one.")
     userdb_worker.connect(name="users_database.db")
     userdb_worker.init_database()
 else:
-    print("Connecting to users database...")
+    print("PREINIT -- Connecting to users database...")
     userdb_worker.connect(name="users_database.db")
+
+userdb_worker.close()
+
+# -- Download updated carrier data
+print("PREINIT -- Downloading updated carrier_data...")
+download_carrier_data()
 
 # -- Run the Discord bot
 if __name__ == "__main__":
